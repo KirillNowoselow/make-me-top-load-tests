@@ -7,10 +7,6 @@ import scala.reflect.internal.util.BatchSourceFile
 
 
 object Request {
-  def csvFeed(path: String):BatchableFeederBuilder[String] = {
-    val feeder = csv(path)
-    return feeder
-  }
 
   def jsonFeed(path: String):FeederBuilderBase[Any] = {
     val feeder = jsonFile(path)
@@ -20,9 +16,15 @@ object Request {
   def auth = {
     exec {
       http("Login")
-        .post("api/v1/auth/login")
+        .post("api/v1/auth/login/")
+        .body(StringBody("""
+{
+    "login": "user",
+    "password": "user",
+    "role": "KEEPER"
+}
+""")).asJson
         .header("content-type", "application/json")
-        .check(status.is(200))
     }
   }
 
@@ -30,7 +32,6 @@ object Request {
     exec {
       http("Get Planet By Id")
         .get("api/v1/planet-app/planets/1")
-        .basicAuth("big_brother", "big_brother")
         .header("content-type", "application/json")
         .check(status.is(200))
     }

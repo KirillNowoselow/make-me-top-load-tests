@@ -4,9 +4,7 @@ import io.gatling.core.Predef._
 import scenarios.Simulation.{PlanetRequestScen}
 
 class PlanetLoadTest extends Simulation{
-  val httpConf = http.baseUrl("http://localhost:8103/")
-    .header("Accept", "application/json")
-    .proxy(Proxy("localhost", 8103))
+  val httpConf = http.baseUrl("http://10.254.1.192:8103/")
 
   setUp(
     PlanetRequestScen.inject(

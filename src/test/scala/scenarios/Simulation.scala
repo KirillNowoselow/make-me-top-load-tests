@@ -6,6 +6,5 @@ import requests.Request._
 
 object Simulation {
   def PlanetRequestScen = scenario("planetRequest")
-    .feed(jsonFeed("logindatafile.json"))
     .exec(auth)
 }
