@@ -5,6 +5,13 @@ import requests.Request
 import requests.Request._
 
 object Simulation {
-  def PlanetRequestScen = scenario("planetRequest")
-    .exec(auth)
+  def GetPlanetByIdScen = scenario("getPlanetById")
+    .exec(getToken)
+    .pause(2)
+    .exec(getPlanetById)
+
+  def GetSustemsScen = scenario("getSystems")
+    .exec(getToken)
+    .pause(2)
+    .exec(getSystems)
 }
