@@ -1,17 +1,18 @@
 package scenarios
 import io.gatling.http.Predef._
 import io.gatling.core.Predef._
-import requests.Request
+import requests.{AuthRequest, Request}
 import requests.Request._
 
 object Simulation {
-  def GetPlanetByIdScen = scenario("getPlanetById")
-    .exec(getToken)
-    .pause(2)
+  val getAccessToken = scenario("Get token")
+    .exec(AuthRequest.getAccessToken)
+
+  def planetScen = scenario("getPlanetById")
+    .exec(getAccessToken)
     .exec(getPlanetById)
 
-  def GetSustemsScen = scenario("getSystems")
-    .exec(getToken)
-    .pause(2)
+  def systemsScen = scenario("getSystems")
+    .exec(getAccessToken)
     .exec(getSystems)
 }

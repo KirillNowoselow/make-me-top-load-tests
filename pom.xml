@@ -40,6 +40,24 @@
         <artifactId>gatling-maven-plugin</artifactId>
         <version>${gatling-maven-plugin.version}</version>
       </plugin>
+
+      <plugin>
+        <groupId>io.gatling</groupId>
+        <artifactId>gatling-maven-plugin</artifactId>
+        <version>3.0.5</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>test</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <simulationsFolder>src/test/scala</simulationsFolder>
+          <simulationClass>simulations.PlanetLoadTest</simulationClass>
+          <simulationClass>simulations.SystemLoadTest</simulationClass>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 </project>

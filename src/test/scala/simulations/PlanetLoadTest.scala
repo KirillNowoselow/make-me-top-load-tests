@@ -7,7 +7,7 @@ class PlanetLoadTest extends Simulation{
   val httpConf = http.baseUrl("http://10.254.1.192:8102/")
 
   setUp(
-    GetPlanetByIdScen.inject(
+    planetScen.inject(
       constantUsersPerSec(1) during 1
     ).protocols(httpConf)
   )
