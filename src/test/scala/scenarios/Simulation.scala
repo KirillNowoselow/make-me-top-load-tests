@@ -10,9 +10,14 @@ object Simulation {
 
   def planetScen = scenario("getPlanetById")
     .exec(getAccessToken)
+    .exec(AuthRequest.useAccessToken)
+    .pause(2)
     .exec(getPlanetById)
 
   def systemsScen = scenario("getSystems")
     .exec(getAccessToken)
-    .exec(getSystems)
+    .exec(AuthRequest.useAccessToken)
+    .pause(4)
+    .exec(getGalaxies)
+    .exec(getSystemsById)
 }

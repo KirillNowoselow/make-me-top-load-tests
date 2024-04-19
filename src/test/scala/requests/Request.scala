@@ -15,7 +15,8 @@ object Request {
   private val authHeaders = Map(
     "Accept" -> "application/json",
     "Content-Type" -> "application/json",
-    "Authorization" -> "Bearer ${accessToken}")
+    "Authorization" -> "Bearer ${accessToken}"
+  )
 
   def getPlanetById = {
     exec {
@@ -26,13 +27,22 @@ object Request {
     }
   }
 
-  def getSystems = {
+  def getSystemsById = {
     exec {
-      http("Get Planet By Id")
-        .get("api/v1/galaxy-app/systems/")
+      http("Get System By Id")
+        .get("api/v1/galaxy-app/systems/1/")
         .headers(authHeaders)
         .check(status.is(200))
     }
   }
+  def getGalaxies = {
+    exec {
+      http("Get Galaxies")
+        .get("api/v1/galaxy-app/galaxies/")
+        .headers(authHeaders)
+        .check(status.is(200))
+    }
+  }
+
 
 }
