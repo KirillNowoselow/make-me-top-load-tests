@@ -1,23 +1,29 @@
 package scenarios
-import io.gatling.http.Predef._
 import io.gatling.core.Predef._
-import requests.{AuthRequest, Request}
+import requests._
 import requests.Request._
 
 object Simulation {
-  val getAccessToken = scenario("Get token")
+  val accessToken = scenario("Get and use token")
     .exec(AuthRequest.getAccessToken)
-
-  def planetScen = scenario("getPlanetById")
-    .exec(getAccessToken)
     .exec(AuthRequest.useAccessToken)
-    .pause(2)
+
+  def planetScen = scenario("PlanetScenario")
+    .exec(accessToken)
     .exec(getPlanetById)
+    .exec(getPlanetsBySystem)
+    .exec(getPlanets)
 
-  def systemsScen = scenario("getSystems")
-    .exec(getAccessToken)
-    .exec(AuthRequest.useAccessToken)
-    .pause(4)
-    .exec(getGalaxies)
+  def galaxyScen = scenario("GalaxyScenario")
+    .exec(accessToken)
     .exec(getSystemsById)
+    .exec(getSystemsByGalaxyId)
+    .exec(getGalaxiesById)
+    .exec(getGalaxiesBySystemId)
+    .exec(getGalaxiesBySystem)
+    .exec(getGalaxies)
+
+  def homeWorkScen = scenario("HomeWorkScenario")
+    .exec(accessToken)
+    .exec(getHomeWorks)
 }
