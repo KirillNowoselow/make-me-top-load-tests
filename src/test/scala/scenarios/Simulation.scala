@@ -11,8 +11,7 @@ object Simulation {
   def planetScen = scenario("PlanetScenario")
     .exec(accessToken)
     .exec(getPlanetById)
-    .exec(getPlanetsBySystem)
-    .exec(getPlanets)
+    .exec(getPlanetsBySystemId)
 
   def galaxyScen = scenario("GalaxyScenario")
     .exec(accessToken)
@@ -20,10 +19,9 @@ object Simulation {
     .exec(getSystemsByGalaxyId)
     .exec(getGalaxiesById)
     .exec(getGalaxiesBySystemId)
-    .exec(getGalaxiesBySystem)
     .exec(getGalaxies)
 
   def homeWorkScen = scenario("HomeWorkScenario")
     .exec(accessToken)
-    .exec(getHomeWorks)
+    .exec(getHomeWorkByHomeWorkId)
 }

@@ -19,25 +19,25 @@ object Request {
     }
   }
 
-  def getPlanetsBySystem = {
+  def getPlanetsBySystemId = {
     exec {
-      http("Get Planets By System")
-        .get("api/v1/planet-app/systems/planets")
+      http("Get Planets By System Id")
+        .get("api/v1/planet-app/systems/1/planets")
         .headers(authHeaders)
         .check(status.is(200))
     }
   }
 
-  def getPlanets = {
-    exec {
-      http("Get All Planets")
-        .get("api/v1/planet-app/planets")
-        .headers(authHeaders)
-        .check(status.is(200))
-    }
-  }
+//  def getPlanets = {
+//    exec {
+//      http("Get All Planets")
+//        .get("api/v1/planet-app/planets")
+//        .headers(authHeaders)
+//        .check(status.is(200))
+//    }
+//  }
 
-
+/*---------------------------*/
 
   def getSystemsById = {
     exec {
@@ -75,14 +75,14 @@ object Request {
     }
   }
 
-  def getGalaxiesBySystem = {
-    exec {
-      http("Get Galaxies By System")
-        .get("api/v1/galaxy-app/systems/galaxies")
-        .headers(authHeaders)
-        .check(status.is(200))
-    }
-  }
+//  def getGalaxiesBySystem = {
+//    exec {
+//      http("Get Galaxies By System")
+//        .get("api/v1/galaxy-app/systems/galaxies")
+//        .headers(authHeaders)
+//        .check(status.is(200))
+//    }
+//  }
 
   def getGalaxies = {
     exec {
@@ -93,12 +93,41 @@ object Request {
     }
   }
 
+  /*---------------------------*/
 
+//  def getHomeWorks = {
+//    exec{
+//      http("Get All HomeWorks")
+//        .get("api/v1/homework-app/homeworks")
+//        .headers(authHeaders)
+//        .check(status.is(200))
+//    }
+//  }
 
-  def getHomeWorks = {
+  def getHomeWorkByHomeWorkId = {
     exec{
-      http("Get All HomeWorks")
-        .get("api/v1/homework-app/homeworks")
+      http("Get HomeWork By HomeWork Id")
+        .get("api/v1/homework-app/homeworks/1")
+        .headers(authHeaders)
+        .check(status.is(200))
+    }
+  }
+
+  def getHomeWorkByThemeId = {
+    exec{
+      http("Get HomeWork By Theme Id")
+        .get("api/v1/homework-app/themes/1/homeworks")
+        .headers(authHeaders)
+        .check(status.is(200))
+    }
+  }
+
+  /*---------------------------*/
+
+  def getKeeperApprovedRequests = {
+    exec {
+      http("Get Keeper Approved Requests")
+        .get("api/v1/course-registration-app/course-requests/rejections")
         .headers(authHeaders)
         .check(status.is(200))
     }
