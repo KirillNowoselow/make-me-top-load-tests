@@ -3,9 +3,10 @@ package simulations
 import io.gatling.http.Predef._
 import io.gatling.core.Predef._
 import scenarios.Simulation._
+import config.Urls._
 
 class PlanetServiceLoadTest extends Simulation{
-  val httpConf = http.baseUrl(System.getProperty("planetUrl"))
+  val httpConf = http.baseUrl(System.getProperty(planetUrl))
 
   setUp(
     planetScen.inject(
