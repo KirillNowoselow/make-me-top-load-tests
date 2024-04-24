@@ -28,7 +28,6 @@ object AuthRequest {
 
   val useAccessToken = exec(
     session => {
-
       TokenManager.accessToken match {
         case Some(token) => session.set("accessToken", token)
         case None => session

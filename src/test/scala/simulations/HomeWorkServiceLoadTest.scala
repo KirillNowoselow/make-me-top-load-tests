@@ -5,7 +5,7 @@ import io.gatling.core.Predef._
 import scenarios.Simulation._
 
 class HomeWorkServiceLoadTest extends Simulation{
-  val httpConf = http.baseUrl("http://10.254.1.192:8107/")
+  val httpConf = http.baseUrl(System.getProperty("homeWorkUrl"))
 
   setUp(
     homeWorkScen.inject(

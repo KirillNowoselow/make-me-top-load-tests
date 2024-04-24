@@ -5,7 +5,7 @@ import io.gatling.core.Predef._
 import scenarios.Simulation._
 
 class PlanetServiceLoadTest extends Simulation{
-  val httpConf = http.baseUrl("http://10.254.1.192:8102/")
+  val httpConf = http.baseUrl(System.getProperty("planetUrl"))
 
   setUp(
     planetScen.inject(
