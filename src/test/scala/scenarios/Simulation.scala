@@ -5,7 +5,6 @@ import requests.Request._
 
 object Simulation {
   val addUsersPerStep: Int = System.getProperty("addUsersPerStep", "1").toInt
-  val stepRumpTime: Int = System.getProperty("stepRumpTime", "1").toInt
   val stepTime: Int = System.getProperty("stepTime", "1").toInt
   val stepCnt: Int = System.getProperty("stepCnt", "1").toInt
   val stabilityStepTime: Int = System.getProperty("stabilityStepTime", "2").toInt
@@ -25,6 +24,9 @@ object Simulation {
     .exec(getGalaxiesById)
     .exec(getGalaxiesBySystemId)
     .exec(getGalaxies)
+  def personScen = scenario("PersonScenario")
+    .exec(AuthRequest.useAccessToken)
+    .exec(goToProfile)
 
   def homeWorkScen = scenario("HomeWorkScenario")
     .exec(AuthRequest.useAccessToken)

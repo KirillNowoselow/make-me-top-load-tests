@@ -8,7 +8,7 @@
 		<immediateFlush>false</immediateFlush>
 	</appender>
 
-	<logger name="io.gatling.http.engine.response" level="ERROR" />
+	<logger name="io.gatling.http.engine.response" level="TRACE" />
 
 	<root level="WARN">
 		<appender-ref ref="CONSOLE" />

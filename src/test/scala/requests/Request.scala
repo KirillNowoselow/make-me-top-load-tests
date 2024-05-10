@@ -19,6 +19,15 @@ object Request {
     }
   }
 
+  def goToProfile = {
+    exec{
+      http("Profile")
+        .get("api/v1/person-app/people/keeper-profile")
+        .headers(authHeaders)
+        .check(status.is(200))
+    }
+  }
+
   def getPlanetsBySystemId = {
     exec {
       http("Get Planets By System Id")
@@ -27,17 +36,6 @@ object Request {
         .check(status.is(200))
     }
   }
-
-//  def getPlanets = {
-//    exec {
-//      http("Get All Planets")
-//        .get("api/v1/planet-app/planets")
-//        .headers(authHeaders)
-//        .check(status.is(200))
-//    }
-//  }
-
-/*---------------------------*/
 
   def getSystemsById = {
     exec {
@@ -54,6 +52,24 @@ object Request {
         .get("api/v1/galaxy-app/galaxies/1/systems")
         .headers(authHeaders)
         .check(status.is(200))
+    }
+  }
+
+  def addSystem = {
+    exec{
+      http("Add System")
+        .post("api/v1/galaxy-app/orbits/2/systems")
+        .headers(authHeaders)
+        .body(StringBody
+        ("""
+           |{
+           |  "systemName": "System1",
+           |  "systemPosition": 0,
+           |  "description": "string"
+           |}
+           |""")
+        ).asJson
+        .check(status.is(201))
     }
   }
 
@@ -75,15 +91,6 @@ object Request {
     }
   }
 
-//  def getGalaxiesBySystem = {
-//    exec {
-//      http("Get Galaxies By System")
-//        .get("api/v1/galaxy-app/systems/galaxies")
-//        .headers(authHeaders)
-//        .check(status.is(200))
-//    }
-//  }
-
   def getGalaxies = {
     exec {
       http("Get All Galaxies")
@@ -92,17 +99,6 @@ object Request {
         .check(status.is(200))
     }
   }
-
-  /*---------------------------*/
-
-//  def getHomeWorks = {
-//    exec{
-//      http("Get All HomeWorks")
-//        .get("api/v1/homework-app/homeworks")
-//        .headers(authHeaders)
-//        .check(status.is(200))
-//    }
-//  }
 
   def getHomeWorkByHomeWorkId = {
     exec{
@@ -121,8 +117,6 @@ object Request {
         .check(status.is(200))
     }
   }
-
-  /*---------------------------*/
 
   def getKeeperApprovedRequests = {
     exec {
