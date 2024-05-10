@@ -6,19 +6,37 @@ import io.gatling.http.Predef._
 import io.gatling.http.protocol.HttpProtocolBuilder
 import scenarios.Simulation._
 import config.Urls._
+import io.gatling.core.structure.PopulationBuilder
+
 import scala.concurrent.duration._
+import scala.language.postfixOps
 
 
 class GalaxyServiceLoadTest extends Simulation{
-  val cf: Config = ConfigFactory.load("application.conf")
-  var httpConf: HttpProtocolBuilder = http.baseUrl(galaxyUrl)
+  var httpConf = http.baseUrl(galaxyUrl)
+
+  val stepConcurrentUserSnc: PopulationBuilder = galaxyScen.inject(
+      incrementConcurrentUsers(addUsersPerStep)
+        .times(stepCnt)
+        .eachLevelLasting(stepTime seconds)
+        .separatedByRampsLasting(stepRumpTime seconds)
+        .startingFrom(addUsersPerStep))
+    .protocols(httpConf)
+
+  val startConcurrentUserSnc: PopulationBuilder = galaxyScen.inject(
+      rampConcurrentUsers(1).to(addUsersPerStep).during(stepRumpTime seconds))
+    .protocols(httpConf)
+
+  val stabilityConcurrentUserSnc: PopulationBuilder = galaxyScen.inject(
+      constantConcurrentUsers(stepCnt * addUsersPerStep)
+        .during(stabilityStepTime seconds))
+    .protocols(httpConf)
+
 
   setUp(
     getAccessToken.inject(atOnceUsers(1)),
-    galaxyScen.inject(
-    nothingFor(5 seconds),
-    atOnceUsers(5),
-    rampUsers(10) during (10 seconds)
-  ).protocols(httpConf)
+    startConcurrentUserSnc,
+    stepConcurrentUserSnc,
+    stabilityConcurrentUserSnc
   )
 }

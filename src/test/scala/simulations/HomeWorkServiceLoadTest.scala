@@ -6,7 +6,7 @@ import scenarios.Simulation._
 import config.Urls._
 
 class HomeWorkServiceLoadTest extends Simulation{
-  val httpConf = http.baseUrl(System.getProperty(homeWorkUrl))
+  val httpConf = http.baseUrl(homeWorkUrl)
 
   setUp(
     homeWorkScen.inject(

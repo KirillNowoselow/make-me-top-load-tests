@@ -6,7 +6,7 @@ import scenarios.Simulation._
 import config.Urls._
 
 class PlanetServiceLoadTest extends Simulation{
-  val httpConf = http.baseUrl(System.getProperty(planetUrl))
+  val httpConf = http.baseUrl(planetUrl)
 
   setUp(
     planetScen.inject(

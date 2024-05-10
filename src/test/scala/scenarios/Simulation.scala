@@ -4,7 +4,13 @@ import requests._
 import requests.Request._
 
 object Simulation {
-  val getAccessToken = scenario("Get and use token")
+  val addUsersPerStep: Int = System.getProperty("addUsersPerStep", "1").toInt
+  val stepRumpTime: Int = System.getProperty("stepRumpTime", "1").toInt
+  val stepTime: Int = System.getProperty("stepTime", "1").toInt
+  val stepCnt: Int = System.getProperty("stepCnt", "1").toInt
+  val stabilityStepTime: Int = System.getProperty("stabilityStepTime", "2").toInt
+
+  val getAccessToken = scenario("Get token")
     .exec(AuthRequest.getAccessToken)
 
   def planetScen = scenario("PlanetScenario")
