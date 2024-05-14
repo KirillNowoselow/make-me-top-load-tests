@@ -19,11 +19,9 @@ object Simulation {
 
   def galaxyScen = scenario("GalaxyScenario")
     .exec(AuthRequest.useAccessToken)
-    .exec(getSystemsById)
-    .exec(getSystemsByGalaxyId)
-    .exec(getGalaxiesById)
-    .exec(getGalaxiesBySystemId)
-    .exec(getGalaxies)
+    .exec(addSystem)
+    .exec(deleteSystem)
+
   def personScen = scenario("PersonScenario")
     .exec(AuthRequest.useAccessToken)
     .exec(goToProfile)

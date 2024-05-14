@@ -3,6 +3,8 @@ package requests
 import io.gatling.http.Predef._
 import io.gatling.core.Predef._
 
+import javax.swing.plaf.basic.BasicBorders.MarginBorder
+
 object Request {
   private val authHeaders = Map(
     "Accept" -> "application/json",
@@ -67,9 +69,20 @@ object Request {
            |  "systemPosition": 0,
            |  "description": "string"
            |}
-           |""")
+           |""".stripMargin)
         ).asJson
-        .check(status.is(201))
+        .check(
+          status.is(201),
+          bodyString.transform(_.toInt).saveAs("systemId"))
+    }
+  }
+
+  def deleteSystem = {
+    exec{
+      http("Delete System")
+        .delete("api/v1/galaxy-app/systems/${systemId}")
+        .headers(authHeaders)
+        .check(status.is(200))
     }
   }
 

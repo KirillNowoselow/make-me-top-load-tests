@@ -1,5 +1,5 @@
 {
-  "login": "user",
-  "password": "user",
-  "role": "KEEPER"
+  "login": "big_brother",
+  "password": "big_brother",
+  "role": "BIG_BROTHER"
 }
