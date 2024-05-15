@@ -19,14 +19,20 @@ object Simulation {
 
   def galaxyScen = scenario("GalaxyScenario")
     .exec(AuthRequest.useAccessToken)
-    .exec(addSystem)
-    .exec(deleteSystem)
+    .exec(getSystemsById)
+    .exec(getSystemsByGalaxyId)
+    .exec(getGalaxiesById)
+    .exec(getGalaxiesBySystemId)
+    .exec(getGalaxies)
 
   def personScen = scenario("PersonScenario")
     .exec(AuthRequest.useAccessToken)
     .exec(goToProfile)
 
-  def homeWorkScen = scenario("HomeWorkScenario")
+  def homeworkScen = scenario("HomeworkScenario")
     .exec(AuthRequest.useAccessToken)
     .exec(getHomeWorkByHomeWorkId)
+    .exec(getHomeWorkByThemeId)
+    .exec(createHomeworkForTheme)
+    .exec(deleteHomework)
 }

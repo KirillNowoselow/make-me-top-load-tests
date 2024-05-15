@@ -12,19 +12,12 @@ object Request {
     "Authorization" -> "Bearer ${accessToken}"
   )
 
+  //Запросы для planet-service
+
   def getPlanetById = {
     exec {
       http("Get Planet By Id")
         .get("api/v1/planet-app/planets/1")
-        .headers(authHeaders)
-        .check(status.is(200))
-    }
-  }
-
-  def goToProfile = {
-    exec{
-      http("Profile")
-        .get("api/v1/person-app/people/keeper-profile")
         .headers(authHeaders)
         .check(status.is(200))
     }
@@ -38,6 +31,8 @@ object Request {
         .check(status.is(200))
     }
   }
+
+  //Запросы для galaxy-service
 
   def getSystemsById = {
     exec {
@@ -113,9 +108,11 @@ object Request {
     }
   }
 
+  //Запросы для homework-service
+
   def getHomeWorkByHomeWorkId = {
     exec{
-      http("Get HomeWork By HomeWork Id")
+      http("Get HomeWork By Id")
         .get("api/v1/homework-app/homeworks/1")
         .headers(authHeaders)
         .check(status.is(200))
@@ -131,10 +128,42 @@ object Request {
     }
   }
 
-  def getKeeperApprovedRequests = {
+  def createHomeworkForTheme = {
     exec {
-      http("Get Keeper Approved Requests")
-        .get("api/v1/course-registration-app/course-requests/rejections")
+      http("Create Homework For Theme")
+        .post("api/v1/homework-app/themes/1/homeworks")
+        .headers(authHeaders)
+        .body(StringBody
+        (
+          """
+            |{
+            |  "groupId": 0,
+            |  "title": "Домашнее задание",
+            |  "content": "Домашнее задание, Домашнее задание"
+            |}
+            |""".stripMargin)
+        ).asJson
+        .check(
+          status.is(201),
+          bodyString.transform(_.toInt).saveAs("homeworkId"))
+    }
+  }
+
+  def deleteHomework = {
+    exec {
+      http("Delete Homework")
+        .delete("api/v1/homework-app/homeworks/${homeworkId}")
+        .headers(authHeaders)
+        .check(status.is(200))
+    }
+  }
+
+  //Запросы для person-service
+
+  def goToProfile = {
+    exec {
+      http("Profile")
+        .get("api/v1/person-app/people/keeper-profile")
         .headers(authHeaders)
         .check(status.is(200))
     }
