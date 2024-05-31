@@ -15,11 +15,6 @@ object AuthRequest {
         jsonPath("$.accessToken.accessToken").saveAs("accessToken"),
         ))
     .exec { session =>
-      val fw = new BufferedWriter(new FileWriter("accessToken.txt", true))
-      try {
-        fw.write(session("accessToken").as[String] + "\r\n")
-      }
-      finally fw.close()
 
       val accessToken = session("accessToken").as[String]
       TokenManager.accessToken = Some(accessToken)

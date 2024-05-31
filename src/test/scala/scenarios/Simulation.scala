@@ -4,10 +4,8 @@ import requests._
 import requests.Request._
 
 object Simulation {
-  val addUsersPerStep: Int = System.getProperty("addUsersPerStep", "1").toInt
-  val stepTime: Int = System.getProperty("stepTime", "1").toInt
-  val stepCnt: Int = System.getProperty("stepCnt", "1").toInt
-  val stabilityStepTime: Int = System.getProperty("stabilityStepTime", "2").toInt
+  val toNbUsers: Int = System.getProperty("toNbUsers", "1").toInt
+  val duration: Int = System.getProperty("duration", "1").toInt
 
   val getAccessToken = scenario("Get token")
     .exec(AuthRequest.getAccessToken)

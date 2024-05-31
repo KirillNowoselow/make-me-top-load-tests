@@ -12,6 +12,6 @@ class PersonServiceLoadTest extends Simulation{
   setUp(
     getAccessToken.inject(atOnceUsers(1)),
     personScen.inject(
-      rampConcurrentUsers(1).to(addUsersPerStep).during(stepTime seconds))
+      constantConcurrentUsers(toNbUsers).during(duration seconds))
   ).protocols(httpConf)
 }
